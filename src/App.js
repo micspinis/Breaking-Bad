@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Frase from './components/Frase';
 import styled from '@emotion/styled';
 
 // Styled components
 const Contenedor = styled.div`
   display: flex;
   align-items: center;
-  padding-top: 5rem;
+  /* margin-top: 5rem; */
+  padding-top: 15rem;
   flex-direction: column;
 `;
 
@@ -24,21 +26,29 @@ const Boton = styled.button`
 
 
 function App() {
+
+  // state de frases
+  // Recordar que usamos el state por que si bien ya teniamos el dato en el proyecto, usandon el hook useState se realiza en automatico todo el proceso de guardar, mostrar, recargar y reemplazar.
+  const [ frase, guardarFrase ] = useState({});
+
   // Otra forma de resolver las promisses es usando la forma "async await" con esto nos evitamos escribir "then"
   const consultarAPI = async () => {
     const api = await fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes');
     const frase = await api.json()
-    console.log(frase[0]); //[0] Para ir un nivel adentro del objeto y consumir solo la frase.
+    guardarFrase(frase[0]); //[0] Para ir un nivel adentro del objeto y consumir solo la frase.
   }
   
 
   return (
     <Contenedor>
-      <Boton
-       onClick={consultarAPI}
-      >
-        Obtener Frase
-      </Boton>
+        <Frase 
+          frase={frase}
+        />
+        <Boton
+        onClick={consultarAPI}
+        >
+          Obtener Frase
+        </Boton>
     </Contenedor>
   );
 }
