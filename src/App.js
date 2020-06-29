@@ -24,14 +24,11 @@ const Boton = styled.button`
 
 
 function App() {
-
-  const consultarAPI = () => {
-    const api = fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes');
-    // La sitaxis para resolver promisses es con then
-    const frase = api.then( respuesta => respuesta.json());
-    // Cada vez que tenemos un "pendding" en consola debemos colocar un then
-    frase.then( resultado => console.log(resultado));
-        
+  // Otra forma de resolver las promisses es usando la forma "async await" con esto nos evitamos escribir "then"
+  const consultarAPI = async () => {
+    const api = await fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes');
+    const frase = await api.json()
+    console.log(frase[0]); //[0] Para ir un nivel adentro del objeto y consumir solo la frase.
   }
   
 
