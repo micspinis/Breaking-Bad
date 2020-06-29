@@ -7,7 +7,7 @@ const Contenedor = styled.div`
   display: flex;
   align-items: center;
   /* margin-top: 5rem; */
-  padding-top: 15rem;
+  padding-top: 10rem;
   flex-direction: column;
 `;
 
