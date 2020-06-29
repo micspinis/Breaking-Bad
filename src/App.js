@@ -26,8 +26,12 @@ const Boton = styled.button`
 function App() {
 
   const consultarAPI = () => {
-    console.log("Consultando...");
-    
+    const api = fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes');
+    // La sitaxis para resolver promisses es con then
+    const frase = api.then( respuesta => respuesta.json());
+    // Cada vez que tenemos un "pendding" en consola debemos colocar un then
+    frase.then( resultado => console.log(resultado));
+        
   }
   
 
