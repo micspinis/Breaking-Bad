@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Frase from './components/Frase';
 import styled from '@emotion/styled';
 
@@ -22,6 +22,12 @@ const Boton = styled.button`
   padding: 1rem 3rem; 
   font-size: 2rem;
   border: 2px solid black;
+  transition: backgroud-size .8s ease;
+
+  :hover {
+    cursor: pointer;
+    background-size: 400px;
+  }
 `;
 
 
@@ -37,6 +43,12 @@ function App() {
     const frase = await api.json()
     guardarFrase(frase[0]); //[0] Para ir un nivel adentro del objeto y consumir solo la frase.
   }
+
+  // Cargar una frase usando useEffect
+  useEffect(() => {
+    // Cada vez que la pagina se muestra se cargue una frase sin necesidad de realizar la accion.
+    consultarAPI(); 
+  }, [])
   
 
   return (
